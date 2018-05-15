@@ -7,6 +7,19 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>srihash</ToolCommandName>
     <LangVersion>latest</LangVersion>
+    <VersionPrefix>0.1.0</VersionPrefix>
+    <VersionSuffix>build</VersionSuffix>
+    <SourceRevisionId>$(APPVEYOR_REPO_COMMIT)</SourceRevisionId>
+    <PackageVersion Condition="'$(APPVEYOR_REPO_TAG)' == 'true'">$(VersionPrefix)</PackageVersion>
+    <BuildNumber Condition=" '$(BuildNumber)' == '' ">$(APPVEYOR_BUILD_NUMBER)</BuildNumber>
+    <BuildNumber Condition=" '$(BuildNumber)' == '' ">0</BuildNumber>
+    <FileVersion>$(VersionPrefix).$(BuildNumber)</FileVersion>
+    <VersionSuffix Condition=" '$(VersionSuffix)' != '' ">$(VersionSuffix).$(BuildNumber)</VersionSuffix>
+    <Authors>Nate McMaster</Authors>
+    <Description>A command line tool for generating the SRI hash for browsers</Description>
+    <PackageTags>sri;cli;sri hash;subresource integrity</PackageTags>
+    <PackageProjectUrl>https://github.com/natemcmaster/srihash-cli</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/natemcmaster/srihash-cli/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup>
