@@ -38,7 +38,7 @@ namespace SriHash
             }
             else
             {
-                Console.WriteLine(integrity);
+                Console.Write(integrity);
             }
         }
     }
