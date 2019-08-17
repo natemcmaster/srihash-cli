@@ -1,21 +1,15 @@
-version: 0.1.1.{build}
-init:
-  - git config --global core.autocrlf input
-clone_depth: 1
+version: 0.1.{build}
 branches:
   only:
     - master
     - appveyor
-    - /^feature\/.*/
-build_script:
-  - ps: dotnet pack -c Release -o "$(pwd)/artifacts/"
-install:
-  - ps: iwr https://raw.githubusercontent.com/dotnet/cli/release/2.1.3xx/scripts/obtain/dotnet-install.ps1 -outfile dotnet-install.ps1
-  - ps: .\dotnet-install.ps1 -Version 2.1.300-rc1-008673 -InstallDir $env:ProgramFiles/dotnet
-test: off
+skip_branch_with_pr: true
 os: Visual Studio 2017
+build_script:
+  - ps: dotnet pack -c Release -o "$(pwd)/artifacts/" "-p:Version=${env:APPVEYOR_BUILD_VERSION}"
+test: off
 artifacts:
-  - path: 'artifacts\*.nupkg'
+  - path: '**\*.nupkg'
     name: Packages
     type: NuGetPackages
 deploy:
