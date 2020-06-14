@@ -13,15 +13,6 @@ artifacts:
     name: Packages
     type: NuGetPackages
 deploy:
-  - provider: NuGet
-    name: myget
-    artifact: Packages
-    server: https://www.myget.org/F/natemcmaster/api/v2/package
-    symbol_server: https://www.myget.org/F/natemcmaster/api/v2/package
-    on:
-      branch: master
-    api_key:
-      secure: KF1yGk4IHJyyfiHfFSCxJ+p5iZX+KPfCTnCihjD5iIZjasTS1lHeilpbaon4wvcM
   - provider: GitHub
     tag: v$(appveyor_build_version)
     auth_token:
@@ -30,4 +21,4 @@ deploy:
     draft: true
     prerelease: false
     on:
-      branch: master                 # release from master branch only
+      branch: main                 # release from master branch only
